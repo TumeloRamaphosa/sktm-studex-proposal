@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studex Global Markets · Client Onboarding</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #C9A227;
+            --gold-light: #E8D48A;
+            --gold-dark: #8B6914;
+            --gold-glow: rgba(201, 162, 39, 0.3);
+            --black: #0A0A0A;
+            --black-light: #141414;
+            --black-medium: #1E1E1E;
+            --gray-dark: #2A2A2A;
+            --gray: #3A3A3A;
+            --gray-light: #888888;
+            --white: #FAFAFA;
+            --white-muted: #CCCCCC;
+            --success: #4A7C59;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px 20px;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .hero-content { position: relative; z-index: 1; max-width: 900px; }
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: var(--gold-glow);
+            border: 1px solid var(--gold);
+            border-radius: 50px;
+            color: var(--gold);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+
+        h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 20px; }
+        h1 span { color: var(--gold); }
+        .hero-subtitle { font-size: 1.2rem; color: var(--white-muted); margin-bottom: 40px; font-weight: 300; }
+
+        .btn {
+            display: inline-block;
+            padding: 18px 45px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: var(--black);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px var(--gold-glow);
+        }
+
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px var(--gold-glow); }
+
+        /* Section */
+        section { padding: 100px 20px; max-width: 800px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 15px; }
+        .section-header h2 span { color: var(--gold); }
+        .section-header p { color: var(--gray-light); font-size: 1.1rem; }
+
+        /* Document Display */
+        .doc-viewer {
+            background: var(--black-light);
+            border: 1px solid var(--gray-dark);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 60px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .doc-viewer h3 { font-family: 'Playfair Display', serif; color: var(--gold); margin-bottom: 25px; border-bottom: 1px solid var(--gray-dark); padding-bottom: 15px; }
+        .doc-content { color: var(--white-muted); font-size: 1rem; line-height: 1.8; margin-bottom: 30px; }
+        .doc-content p { margin-bottom: 15px; }
+
+        /* Form */
+        .form-card {
+            background: linear-gradient(145deg, var(--black-light) 0%, #050505 100%);
+            border: 1px solid var(--gray-dark);
+            border-radius: 24px;
+            padding: 50px;
+            position: relative;
+        }
+
+        .form-group { margin-bottom: 30px; }
+        label { display: block; color: var(--white); font-size: 0.9rem; margin-bottom: 10px; font-weight: 500; }
+        label span { color: var(--gold); }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 16px 20px;
+            background: var(--black);
+            border: 1px solid var(--gray-dark);
+            border-radius: 12px;
+            color: var(--white);
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, textarea:focus { outline: none; border-color: var(--gold); }
+
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+
+        .kyc-list { list-style: none; margin-bottom: 30px; }
+        .kyc-list li { margin-bottom: 12px; color: var(--white-muted); display: flex; align-items: center; gap: 10px; }
+        .kyc-list li::before { content: '◈'; color: var(--gold); font-size: 12px; }
+
+        /* Footer */
+        footer { text-align: center; padding: 60px 20px; border-top: 1px solid var(--gray-dark); color: var(--gray-light); font-size: 0.9rem; }
+        
+        #successMessage { display: none; text-align: center; padding: 40px; }
+        #successMessage h2 { color: #4A7C59; font-family: 'Playfair Display', serif; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Onboarding Protocol</div>
+            <h1>Northstar <span>Onboarding</span></h1>
+            <p class="hero-subtitle">Step into the Studex Global Markets ecosystem. Powered by SudEx Ai Buiz Assitant.</p>
+            <a href="#context" class="btn">Begin Journey</a>
+        </div>
+    </div>
+
+    <section id="context">
+        <div class="section-header">
+            <div class="hero-badge">The Foundation</div>
+            <h2>Founder <span>Context</span></h2>
+            <p>Understand the ecosystem you are entering.</p>
+        </div>
+
+        <div class="doc-viewer">
+            <h3>Founder's Soul.md</h3>
+            <div class="doc-content">
+                <p><strong>What is Soul.md?</strong> It is the core operating manual of our intelligence—a blueprint of values, vision, and execution. Below is the full founding Soul.md of Studex Global Markets.</p>
+                <div style="background: rgba(255,255,255,0.03); padding: 30px; border-radius: 12px; font-family: monospace; font-size: 0.9rem; border: 1px solid var(--gray-dark); overflow: auto; max-height: 400px;">
+                    # Studex Global Markets - Soul.md<br><br>
+                    Vision: To create a friction-free global marketplace powered by sovereign intelligence.<br><br>
+                    SudEx Ai Buiz Assitant is not just an assistant; it is a digital proxy for your business goals. It understands risk, recognizes opportunity, and acts with the precision of a global trade veteran.<br><br>
+                    Core Principles:<br>
+                    1. Privacy is paramount.<br>
+                    2. Speed is the only currency.<br>
+                    3. Trust is built through verified execution.<br><br>
+                    Welcome to the Circle.
+                </div>
+            </div>
+            <a href="context.pdf" target="_blank" class="btn" style="padding: 12px 30px; font-size: 0.8rem;">View Full Context PDF</a>
+        </div>
+    </section>
+
+    <section id="questionnaire">
+        <div class="section-header">
+            <div class="hero-badge">Configuration</div>
+            <h2>The <span>Questionnaire</span></h2>
+            <p>Define your Northstar. Our SudEx Ai Buiz Assitant will take it from there.</p>
+        </div>
+
+        <div class="form-card">
+            <form id="onboardingForm">
+                <--dev Data from Google Form -->
+                <input type="hidden" name="entry.1645059635" id="f_name"> <--dev Example ID -->
+                
+                <h3>Identity & Goals</h3><br>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Full Name <span>*</span></label>
+                        <input type="text" name="name" required placeholder="Tumelo Ramaphosa">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address <span>*</span></label>
+                        <input type="email" name="email" required placeholder="you@domain.com">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Primary Business Goals <span>*</span></label>
+                    <textarea name="goals" rows="4" required placeholder="What do you want to achieve through Studex?"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Importance of SudEx Ai Buiz Assitant</label>
+                    <p style="font-size: 0.85rem; color: var(--gray-light); margin-bottom: 10px;">
+                        The SudEx Ai Buiz Assitant is designed to be your primary interface for global markets. It leverages the Northstar Framework to ensure every transaction aligns with your core mission.
+                    </p>
+                    <select name="ai_understanding">
+                        <option value="high">I understand the strategic importance</option>
+                        <option value="medium">I am learning the benefits</option>
+                        <option value="low">Need further briefing</option>
+                    </select>
+                </div>
+
+                <h3 style="margin-top: 40px;">KYC Requirements</h3>
+                <p style="font-size: 0.9rem; color: var(--gray-light); margin-bottom: 20px;">Please confirm you have the following ready for upload:</p>
+                <ul class="kyc-list">
+                    <li>Certificate of incorporation / registration</li>
+                    <li>Memorandum and Articles of Association</li>
+                    <li>Registered business address & number</li>
+                    <li>Identification for all directors</li>
+                    <li>Proof of address for directors</li>
+                    <li>Shareholder register</li>
+                </ul>
+
+                <button type="submit" class="btn" style="width: 100%;">Complete Onboarding</button>
+            </form>
+            <div id="successMessage">
+                <h2>Onboarding Complete</h2>
+                <p>Your details have been recorded. Our SudEx Ai Buiz Assitant is now processing your profile.</p>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdz1a2iCnAmWTvAhDuZp0GCSlBP3oCn2D7LnXN0jacnNIOPOQ/viewform" target="_blank" style="color: var(--gold); font-size: 0.8rem;">View entries in Google Forms</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Studex Global Markets. All rights reserved.</p>
+        <p>Powered by SudEx Ai Buiz Assitant AI</p>
+    </footer>
+
+    <script>
+        const form = document.getElementById('onboardingForm');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // In a real scenario, we use the Google Form Action URL
+            const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdz1a2iCnAmWTvAhDuZp0GCSlBP3oCn2D7LnXN0jacnNIOPOQ/formResponse'\;
+            
+            // We would map fields here
+            // const formData = new FormData();
+            // formData.append('entry.123456', form.name.value);
+            
+            // For this demo:
+            form.style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // Simulate post to Google Forms
+            console.log("Submitting to Google Forms...");
+        });
+    </script>
+</body>
+</html>
